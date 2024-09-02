@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\acunmedya\twitter\bin\Release\net8.0\publish\</_PublishTargetUrl>
+    <History>True|2024-08-28T16:25:35.5242376Z||;True|2024-08-28T02:29:16.1355730+03:00||;True|2024-08-20T15:45:10.0791253+03:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

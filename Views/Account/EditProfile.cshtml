@@ -1,0 +1,43 @@
+﻿@model UserModel
+
+@{
+    ViewBag.Title = "Kullanıcı Düzenle";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-primary">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (ViewBag.AuthError != null)
+{
+    <div class="alert alert-secondary">
+        @ViewBag.AuthError
+    </div>
+}
+
+<div class="container mt-5">
+    <form action="/kullaniciduzenle/@Model.Username" method="post" enctype="multipart/form-data" autocomplete="off">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" name="Id" value="@Model.Username" />
+        <div class="mb-3">
+            <label class="form-label">Ad</label>
+            <input type="text" class="form-control" name="Name" value="@Model.Name" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Soyad</label>
+            <input type="text" class="form-control" name="Surname" value="@Model.Surname" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">E-Posta Adresi</label>
+            <input type="text" class="form-control" name="Email" value="@Model.Email" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Şifre</label>
+            <input type="password" class="form-control" name="Password" value="@Model.Password" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Güncelle</button>
+    </form>
+</div>

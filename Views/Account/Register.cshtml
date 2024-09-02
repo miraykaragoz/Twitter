@@ -1,0 +1,142 @@
+﻿@model UserModel
+
+@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-primary" role="alert">
+        @ViewBag.SuccessMessage <a href="/Account/Login" class="alert-link">Giriş yapmak için tıklayınız.</a>
+    </div>
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-secondary mb-3" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+</head> 
+<body>
+    <div class="login-box">
+        <h2>Kayıt Ol</h2>
+        <form method="post" action="/kayit" autocomplete="off">
+            <div class="user-box">
+                <input type="text" name="Name" required>
+                <label>Ad</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="Surname" required>
+                <label>Soyad</label>
+            </div>
+            <div class="user-box">
+                <input type="email" name="Email" required>
+                <label>E-Posta Adresi</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="Username" required>
+                <label>Kullanıcı Adı</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="Password" required>
+                <label>Şifre</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="PasswordConfirm" required>
+                <label>Şifre Tekrar</label>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+<style>
+    import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+    html {
+        height: 100%;
+        font-family: Montserrat;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .login-box {
+        position: relative; /* absolute yerine relative olarak değiştirildi */
+        margin-top: 100px; /* Header ile form arasına boşluk eklemek için */
+        left: 50%;
+        width: 400px;
+        padding: 40px;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,.5);
+        box-sizing: border-box;
+        box-shadow: 0 15px 25px rgba(0,0,0,.6);
+        border-radius: 10px;
+    }
+
+
+        .login-box h2 {
+            margin: 0 0 30px;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .login-box .user-box {
+            position: relative;
+        }
+
+            .login-box .user-box input {
+                width: 100%;
+                padding: 10px 0;
+                font-size: 16px;
+                color: #fff;
+                margin-bottom: 30px;
+                border: none;
+                border-bottom: 1px solid #fff;
+                outline: none;
+                background: transparent;
+            }
+
+            .login-box .user-box label {
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: 10px 0;
+                font-size: 16px;
+                color: #fff;
+                pointer-events: none;
+                transition: .5s;
+            }
+
+            .login-box .user-box input:focus ~ label,
+            .login-box .user-box input:valid ~ label {
+                top: -20px;
+                left: 0;
+                font-size: 12px;
+            }
+
+        .login-box form a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 40px;
+            letter-spacing: 4px
+        }
+</style>

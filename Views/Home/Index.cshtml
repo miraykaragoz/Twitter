@@ -1,0 +1,119 @@
+﻿@model List<TweetModel>
+
+@{
+    ViewData["Title"] = "Anasayfa";
+}
+
+@foreach (var tweets in Model)
+{
+    <div class="max-w-xl mx-auto mt-10">
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <div class="flex items-start">
+                <img class="w-12 h-12 rounded-full" src="~/uploads/@tweets.ImgPath" alt="Profile Photo">
+                <div class="ml-4">
+                    <div class="flex items-center">
+                        <a href="/profile/@tweets.Username">
+                            <h2 class="font-bold text-lg">@tweets.Username</h2>
+                        </a>
+                    </div>
+                    <p class="mt-2 text-gray-800"><a href="/detay/@tweets.Id">@tweets.Tweet</a></p>
+                    @if (!string.IsNullOrEmpty(tweets.TweetImg))
+                    {
+                        <img class="mt-2 tweet-image cursor-pointer" src="~/uploads/@tweets.TweetImg" alt="Tweet Media" onclick="openModal('~/uploads/@tweets.TweetImg')">
+                    }
+                    <div class="text-gray-500 text-sm mt-2">@tweets.CreatedDate.ToString("ddd, dd MMM yyyy")</div>
+                    <div class="flex items-center mt-4">
+                        <button class="flex items-center text-blue-500 hover:text-blue-600" onclick="handleLikeButtonClick('@tweets.Id')">
+                            <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"></path></svg>
+                            Beğen
+                        </button>
+                        <div class="heart-container" id="heart-container-@tweets.Id"></div>
+                        <button class="flex items-center text-blue-500 hover:text-blue-600 ml-4" onclick="toggleCommentInput('@tweets.Id')">
+                            <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M18 10c0 4.418-3.582 8-8 8a7.963 7.963 0 01-4.906-1.688L2 18l1.688-3.094A7.963 7.963 0 012 10c0-4.418 3.582-8 8-8s8 3.582 8 8z"></path></svg>
+                            Yorum Yap
+                        </button>
+                        <button class="flex items-center text-blue-500 hover:text-blue-600 ml-4" onclick="handleFollowButtonClick(this)">
+                            <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"></path></svg>
+                            Takip Et
+                        </button>
+                        <button class="flex items-center text-blue-500 hover:text-blue-600 ml-4">
+                            <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M17.707 7.293a1 1 0 00-1.414 0L10 13.586 7.707 11.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l7-7a1 1 0 000-1.414z"></path></svg>
+                            Retweet
+                        </button>
+                    </div>
+                    <div id="comment-input-@tweets.Id" class="hidden mt-4">
+                        <textarea class="w-full p-2 border rounded-lg" placeholder="Yorum Yap..."></textarea>
+                        <button class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Paylaş</button>
+                    </div>
+                    <div class="heart-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .tweet-image {
+        width: 50%;
+        max-width: 500px;
+        height: auto;
+        border-radius: 0.5rem;
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    #imageModal img {
+        max-width: 90vw;
+        max-height: 90vh;
+        border-radius: 0.5rem;
+    }
+</style>
+
+<div id="imageModal" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white p-4 rounded-lg">
+        <span class="cursor-pointer" onclick="closeModal()">X</span>
+        <img id="modalImage" src="" alt="Modal Image" class="mt-2">
+    </div>
+</div>
+
+<script defer>
+    function openModal(imageSrc) {
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        modalImage.src = imageSrc.replace('~', '');
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('imageModal');
+        modal.classList.add('hidden');
+    }
+
+    function toggleCommentInput(tweetId) {
+        const commentInput = document.getElementById(`comment-input-${tweetId}`);
+        commentInput.classList.toggle('hidden');
+    }
+
+    function handleLikeButtonClick(tweetId) {
+        const heartContainer = document.getElementById(`heart-container-${tweetId}`);
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = '❤️';
+        heartContainer.appendChild(heart);
+
+        setTimeout(() => {
+            heart.classList.add('animate-heart');
+        }, 10);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 1000);
+    }
+
+    function handleFollowButtonClick(button) {
+        button.innerHTML = 'Takip Edildi';
+        button.disabled = true;
+    }
+</script>

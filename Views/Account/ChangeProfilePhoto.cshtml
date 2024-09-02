@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Profil Fotoğrafı Değiştir";
+}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="custom-card bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-4">Profil Fotoğrafı Değiştir</h2>
+
+        @if (ViewBag.SuccessMessage != null)
+        {
+            <div class="alert alert-primary">
+                @ViewBag.SuccessMessage
+            </div>
+        }
+
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-secondary mb-3" role="alert">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+
+        <form method="post" action="/ProfilFotografiDegistir" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="Img">Yeni Profil Fotoğrafı:</label>
+                <label class="custom-file-upload w-100">
+                    <input type="file" id="Img" name="Img" accept="image/*" required />
+                    Fotoğraf Ekle
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Değiştir
+            </button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .custom-card {
+        width: 100%;
+        max-width: 700px;
+    }
+
+    .custom-file-upload {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        cursor: pointer;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        background-color: #f8f9fa;
+        color: #333;
+        width: 100%;
+        text-align: center;
+        height: 45px;
+    }
+
+        .custom-file-upload input[type="file"] {
+            display: none;
+        }
+
+    .btn-primary {
+        color: white;
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 0.375rem 0.75rem;
+        border-radius: 0.25rem;
+        transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-content-center {
+        justify-content: center;
+    }
+
+    .align-items-center {
+        align-items: center;
+    }
+</style>

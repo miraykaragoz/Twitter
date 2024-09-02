@@ -1,0 +1,70 @@
+﻿@model DetailModel
+
+@{
+    ViewData["Title"] = Model.Tweet.Tweet;
+}
+
+<div class="max-w-xl mx-auto mt-10">
+    <div class="bg-white p-4 rounded-lg shadow-md relative">
+        <div class="flex items-start">
+            <a href="/profile/@Model.Tweet.Username">
+                <img class="w-12 h-12 rounded-full" src="/uploads/@Model.Tweet.ImgPath" alt="Profile Photo">
+            </a>
+            <div class="ml-4 flex-1">
+                <div class="flex items-center justify-between">
+                    <a href="/profile/@Model.Tweet.Username">
+                        <h2 class="font-bold text-lg">@Model.Tweet.Username</h2>
+                    </a>
+                </div>
+                <p class="mt-2 text-gray-800" value="@Model.Tweet.Tweet"></p>
+                @if (!string.IsNullOrEmpty(Model.Tweet.TweetImg))
+                {
+                    <img class="mt-2 tweet-image cursor-pointer" src="/uploads/@Model.Tweet.TweetImg" alt="Tweet Media" onclick="openModal('/uploads/@Model.Tweet.TweetImg')">
+                }
+                <div class="text-gray-500 text-sm mt-2">@Model.Tweet.CreatedDate.ToString("ddd, dd MMM yyyy")</div>
+                <div class="heart-container"></div>
+            </div>
+        </div>
+    </div>
+    <br />
+</div>
+
+<style>
+    .tweet-image {
+        width: 50%;
+        max-width: 500px;
+        height: auto;
+        border-radius: 0.5rem;
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    #imageModal img {
+        max-width: 90vw;
+        max-height: 90vh;
+        border-radius: 0.5rem;
+    }
+</style>
+
+<div id="imageModal" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white p-4 rounded-lg">
+        <span class="cursor-pointer" onclick="closeModal()">X</span>
+        <img id="modalImage" src="" alt="Modal Image" class="mt-2">
+    </div>
+</div>
+
+<script defer>
+    function openModal(imageSrc) {
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        modalImage.src = imageSrc.replace('~', '');
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('imageModal');
+        modal.classList.add('hidden');
+    }
+</script>
