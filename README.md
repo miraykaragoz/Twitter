@@ -1,3 +1,3 @@
-Twitter, kullanıcıların düşüncelerini ve anlık durumlarını paylaşmalarını sağlayan hızlı, sade ve kullanışlı bir sosyal medya platformudur. Kısa mesajlar göndererek takipçilerinizle etkileşime geçebilir, diğer kullanıcıların paylaşımlarını keşfedebilirsiniz. Uygulama, sosyal ağlarda iletişimi daha eğlenceli ve erişilebilir hale getirir.
+Twitter is a fast, simple, and user-friendly social media platform that allows users to share their thoughts and real-time updates. By sending short messages, users can engage with their followers and discover content from others. The application makes communication on social networks more fun and accessible.
 
-Live demo: https://twitter.miraykaragoz.com.tr/
+🔗 Live link: https://twitter.miraykaragoz.com.tr/
